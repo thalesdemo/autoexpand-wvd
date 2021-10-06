@@ -1,0 +1,1 @@
+powershell.exe .\Get-AutoWvdLogs.ps1

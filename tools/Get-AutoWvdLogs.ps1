@@ -1,0 +1,1 @@
+Get-Content -Path $env:TEMP\autoexpand-wvd.log -Wait -Tail 30
