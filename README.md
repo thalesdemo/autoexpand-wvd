@@ -13,17 +13,17 @@
 * [Source code](#source-code)
 
 ## Overview
-This demo tool can be deployed to better streamline user experience in being prompted to enter their multi-factor authentication factor without having to click on the 'Show Details' button of the RDP connection. It can be useful in scenarios where the published applications, or session hosts, are secured with the SafeNet Windows Logon agent.
+This demo tool can be deployed to better streamline user experience in being prompted for multi-factor authentication factor without having the user click on the 'Show Details' button in the RDP window. It can be useful in scenarios where the published applications, or session hosts, are secured with the SafeNet Windows Logon agent.
 
-The executable must be installed on the user's Windows machines that are initating the Remote Desktop apps. A Windows task scheduler can be set to automatically launch this app once the user logs in to his machine.
+The executable must be installed on every machine where users are initating the Remote Desktop apps (run under the user context). To automate launch on startup, a simple Windows task scheduler can be configured.
 
-The tool will continuously run in the background without any console window, or logs unless turned on by passing an argument in the command line.
+This application is portable and does not require admin privilege. It continuously runs in the background without any console window, or for that matter, without logs unless explicitely turned on by passing an argument [-d] in the command line.
 
 ![example.gif](https://github.com/thalesdemo/autoexpand-wvd/blob/main/example.gif)
 
 ## Setup
 
-Double-click on the executable, or run with any combination of the arguments below:
+Double-click on the executable, or run with any of the optional arguments below:
 
 ###### Syntax:
 
@@ -42,13 +42,22 @@ optional arguments:
 ```
 
 
+>__NOTE__
+>
+>You must match the `APPNAME` to the title of your Remote App window. In this example, we used *SDC Apps* (see animated gif).
+>
+>A WVD admin could always rename this window from CLI:
+>
+>``Set-RdsRemoteDesktop -TenantName <WVDCompanyTenant> -HostPoolName <WVDHostPool> -AppGroupName "<Desktop App Group>" -FriendlyName "New Name"``
+  
+
 ## Source code
 To compile your own executable, install Python and Pipenv, then follow these steps.
 
-After cloning this repository, run in sequence :
+After cloning this repository, run in sequence:
 > `make install`
 >
 > `make`
 
-To clean and start over :
+To clean and start over:
 > `make clean`
