@@ -10,7 +10,7 @@
 ## Table of contents
 * [Overview](#overview)
 * [Setup](#setup)
-* [Source code](#sourcecode)
+* [Source code](#source-code)
 
 ## Overview
 This demo tool can be deployed to better streamline user experience in being prompted to enter their multi-factor authentication factor without having to click on the 'Show Details' button of the RDP connection. It can be useful in scenarios where the published applications, or session hosts, are secured with the SafeNet Windows Logon agent.
