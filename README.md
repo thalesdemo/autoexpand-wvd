@@ -13,7 +13,7 @@
 * [Source code](#source-code)
 
 ## Overview
-This demo tool can be deployed to better streamline user experience in being prompted for multi-factor authentication factor without having the user click on the 'Show Details' button in the RDP window. It can be useful in scenarios where the published applications, or session hosts, are secured with the SafeNet Windows Logon agent.
+This demo tool can be deployed to better streamline user experience in being prompted for multi-factor authentication without having the user click on the 'Show Details' button in the RDP window. It can be useful in scenarios where the published applications, or session hosts, are secured with the SafeNet Windows Logon agent.
 
 The executable must be installed on every machine where users are initating the Remote Desktop apps (run under the user context). To automate launch on startup, a simple Windows task scheduler can be configured.
 
