@@ -47,6 +47,7 @@ To compile your own executable, install Python and Pipenv, then follow these ste
 
 After cloning this repository, run in sequence :
 > `make install`
+>
 > `make`
 
 To clean and start over :
