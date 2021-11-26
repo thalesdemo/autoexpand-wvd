@@ -5,7 +5,7 @@
  Cina Shaykhian <cina.shaykhian@thalesgroup.com>
 
 ## version
- beta - 2021.10.06
+ beta - 2021.11.25
 
 ## Table of contents
 * [Overview](#overview)
@@ -31,8 +31,8 @@ Double-click on the executable, or run with any of the optional arguments below:
 usage: autoexpand-wvd-beta.exe [-a APPNAME] [-i INTERVAL] [-l LOGPATH] [-d] [-s]
 
 optional arguments:
-  -a APPNAME, --appname APPNAME
-                        name of the application window (default = SDC Apps)
+  -a APPSUFFIX, --appsuffix APPSUFFIX
+                        name of the application window (default = <space>Apps)
   -i INTERVAL, --interval INTERVAL
                         scan interval in seconds (default = 3.0)
   -l LOGPATH, --logpath LOGPATH
@@ -44,7 +44,7 @@ optional arguments:
 
 >__NOTE__
 >
->You must match the `APPNAME` to the title of your Remote App window. In this example, we used *SDC Apps* (see animated gif).
+>You must match `APPSUFFIX` to the end portion of your Remote App window's title. In this example, `APPSUFFIX` is set to *<space>Apps* since the title is *SDC Apps* (see animated gif).
 >
 >A WVD admin could always rename this window from CLI:
 >

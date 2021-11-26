@@ -8,14 +8,15 @@ import argparse
 from getpass import getuser
 
 # Input params
+ButtonName = 'Show Details '
 defaultLogPath = tempfile.gettempdir() + '\\' + 'autoexpand-wvd.log'
 current_user = getuser()
 parser = argparse.ArgumentParser()
-parser.add_argument('-a', '--appname',  default='SDC Apps', help='name of the application window (default = SDC Apps)')
-parser.add_argument('-i', '--interval', default='3.0', help='scan interval in seconds (default = 3.0)', type=float)
-parser.add_argument('-l', '--logpath',  default=defaultLogPath, help='custom debug log path, default = %%temp%%\\autoexpand-wvd.log')
-parser.add_argument('-d', '--debug',    action='store_true', help="set switch to enable debugging (default = disabled)")
-parser.add_argument('-s', '--safemode', action='store_true', help='set switch to turn off app process checks + termination (default = disabled)')
+parser.add_argument('-a', '--appsuffix', default=' Apps', help='name of the workspace suffix (default = <space>Apps)')
+parser.add_argument('-i', '--interval',  default='3.0', help='scan interval in seconds (default = 3.0)', type=float)
+parser.add_argument('-l', '--logpath',   default=defaultLogPath, help='custom debug log path, default = %%temp%%\\autoexpand-wvd.log')
+parser.add_argument('-d', '--debug',     action='store_true', help='set switch to enable debugging (default = disabled)')
+parser.add_argument('-s', '--safemode',  action='store_true', help='set switch to turn off app process checks + termination (default = disabled)')
 args = parser.parse_args()
 
 # Logging 
@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
 logger.debug('<>'*30 + '\n%s', args)
 
 # Remove bootloader process	
+
 if args.safemode:
 	logger.debug('Safe mode enabled.')
 else:
@@ -48,22 +50,20 @@ else:
 def winEnumHandler( hwnd, ctx ):
 	global FoundAppWindow
 	if win32gui.IsWindowVisible( hwnd ):
-		if win32gui.GetWindowText( hwnd ) == args.appname:
-				FoundAppWindow = True
-
-# WindowSpecifications
-ButtonName = 'Show Details '
-dlg = Desktop(backend="uia").window(title=args.appname)
-buttonCtrl = dlg.window(title=ButtonName, control_type='Button')
+		if win32gui.GetWindowText( hwnd ).endswith( args.appsuffix ):
+			FoundAppWindow = win32gui.GetWindowText( hwnd )
 
 logger.debug("App started.")
 while(True):
 	time.sleep(args.interval)
 	try:
-		FoundAppWindow = False
+		FoundAppWindow = None
 		win32gui.EnumWindows( winEnumHandler, None ) # sets FoundAppWindow 
 		if FoundAppWindow:	
-			logger.debug('Found window.')
+			logger.debug('Found window: %s', FoundAppWindow)
+			# WindowSpecifications
+			dlg = Desktop(backend="uia").window(title=FoundAppWindow)
+			buttonCtrl = dlg.window(title=ButtonName, control_type='Button')
 			if dlg.is_enabled():
 				logger.debug('Ready window.')
 				if buttonCtrl.exists( timeout=0 ):
