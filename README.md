@@ -28,7 +28,7 @@ Double-click on the executable, or run with any of the optional arguments below:
 ###### Syntax:
 
 ```
-usage: autoexpand-wvd-beta.exe [-a APPNAME] [-i INTERVAL] [-l LOGPATH] [-d] [-s]
+usage: autoexpand-wvd-beta.exe [-a APPSUFFIX] [-i INTERVAL] [-l LOGPATH] [-d] [-s]
 
 optional arguments:
   -a APPSUFFIX, --appsuffix APPSUFFIX
